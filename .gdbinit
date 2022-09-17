@@ -10,18 +10,9 @@ document set_ts
 end
 
 define ____executor_globals
-	if basic_functions_module.zts
-		if !$tsrm_ls
-			set $tsrm_ls = ts_resource_ex(0, 0)
-		end
-		set $eg = ((zend_executor_globals*) (*((void ***) $tsrm_ls))[executor_globals_id-1])
-		set $cg = ((zend_compiler_globals*) (*((void ***) $tsrm_ls))[compiler_globals_id-1])
-		set $eg_ptr = $eg
-	else
-		set $eg = executor_globals
+		set $eg = (zend_executor_globals)executor_globals
 		set $cg = compiler_globals
 		set $eg_ptr = (zend_executor_globals*) &executor_globals
-	end
 end
 
 document ____executor_globals
